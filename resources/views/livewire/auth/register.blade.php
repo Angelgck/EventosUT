@@ -71,9 +71,13 @@ new #[Layout('components.layouts.auth')] class extends Component {
             </label>
             <select wire:model="carrera" id="carrera" name="carrera" class="block w-full rounded-lg border-zinc-300 bg-white text-zinc-950 transition duration-150 ease-in-out focus:border-primary-500 focus:ring-primary-500 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:placeholder-zinc-400" required>
                 <option value="" disabled>Selecciona tu carrera</option>
-                <option value="Ingeniería en Software">Ingeniería en Software</option>
-                <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
-                <option value="Licenciatura en Terapia Física">Licenciatura en Terapia Física</option>
+                <option value="Técnico Superior Universitario en Entornos Virtuales y Negocios Digitales">Técnico Superior Universitario en Entornos Virtuales y Negocios Digitales</option>
+                <option value="Técnico Superior Universitario en Tecnologías de la Información Software">Técnico Superior Universitario en Tecnologías de la Información Software</option>
+                <option value="Técnico Superior Universitario en Gastronomía">Técnico Superior Universitario en Gastronomía</option>
+                <option value="Técnico Superior Universitario en Turismo, Área Hotelería">Técnico Superior Universitario en Turismo, Área Hotelería</option>
+                <option value="Técnico Superior Universitario en Mantenimiento, Área Instalaciones">Técnico Superior Universitario en Mantenimiento, Área Instalaciones</option>
+                <option value="Técnico Superior Universitario en Terapia Física">Técnico Superior Universitario en Terapia Física</option>
+                <option value="Técnico Superior Universitario en Administración, Área Capital Humano">Técnico Superior Universitario en Administración, Área Capital Humano</option>
                 </select>
             @error('carrera') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
@@ -84,7 +88,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
             type="text"
             required
             autocomplete="off"
-            :placeholder="__('Ej: 3A, 5B, etc.')"
+            :placeholder="__('Ej: Ti43, GA40, Ti53, etc.')"
         />
 
         <flux:input
