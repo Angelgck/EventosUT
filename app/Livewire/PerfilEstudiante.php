@@ -12,7 +12,8 @@ class PerfilEstudiante extends Component
         $user = Auth::user();
 
         // Obtenemos los eventos a los que el usuario está inscrito
-        $eventos = $user->eventosInscritos()->orderBy('fecha_inicio', 'desc')->get();
+        // Se corrige el nombre del método a "eventos()"
+        $eventos = $user->eventos()->orderBy('fecha_inicio', 'desc')->get();
 
         // Calculamos el total de horas sumando la columna 'horas_asignadas' de los eventos
         $totalHoras = $eventos->sum('horas_asignadas');

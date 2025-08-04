@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany; // <-- 1. Importante tener esta línea
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -24,12 +22,13 @@ class User extends Authenticatable
         'password',
         'carrera',
         'grupo',
+        'role',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -49,20 +48,20 @@ class User extends Authenticatable
         ];
     }
 
-    public function eventosInscritos()
+    /**
+     * Los eventos en los que un usuario está registrado.
+     */
+    public function eventos(): BelongsToMany // <-- 2. Este es el método que soluciona el error
     {
-        return $this->belongsToMany(\App\Models\Evento::class, 'evento_user');
+        return $this->belongsToMany(Evento::class, 'evento_user', 'user_id', 'evento_id')
+                    ->withTimestamps();
     }
 
     /**
-     * Get the user's initials
+     * Genera las iniciales del nombre del usuario.
      */
     public function initials(): string
     {
-        return Str::of($this->name)
-            ->explode(' ')
-            ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
-            ->implode('');
+        return collect(explode(' ', $this->name))->map(fn ($name) => mb_substr($name, 0, 1))->take(2)->implode('');
     }
 }

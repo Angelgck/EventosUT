@@ -30,11 +30,12 @@ class Dashboard extends Component
     {
         $eventos = Evento::withCount('participantes')->latest()->get();
         
-        $eventosInscritosIds = Auth::user()->eventosInscritos()->pluck('eventos.id')->toArray();
+        // El cambio es especificar la tabla en el pluck: de 'id' a 'eventos.id'
+        $eventosInscritosIds = Auth::user()->eventos()->pluck('eventos.id')->toArray(); // <-- LÍNEA CORREGIDA
 
         return view('livewire.dashboard', [
             'eventos' => $eventos,
             'eventosInscritosIds' => $eventosInscritosIds,
-        ])->layout('components.layouts.app'); // <-- ASEGÚRATE DE QUE ESTA LÍNEA ESTÉ ASÍ
+        ])->layout('components.layouts.app');
     }
 }

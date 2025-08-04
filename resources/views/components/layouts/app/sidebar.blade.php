@@ -14,9 +14,14 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    
                     @can('isAdmin')
-                       <flux:navlist.item icon="calendar-days" :href="route('gestionar.eventos')" :current="request()->routeIs('gestionar.eventos')" wire:navigate>{{ __('Gestionar Eventos') }}</flux:navlist.item>
-                    @endcan   
+                        <flux:navlist.item icon="calendar-days" :href="route('gestionar.eventos')" :current="request()->routeIs('gestionar.eventos')" wire:navigate>{{ __('Gestionar Eventos') }}</flux:navlist.item>
+                        
+                        <!-- ===== INICIO DEL CÓDIGO AÑADIDO ===== -->
+                        <flux:navlist.item icon="user-group" :href="route('admin.historial')" :current="request()->routeIs('admin.historial')" wire:navigate>{{ __('Historial Estudiantes') }}</flux:navlist.item>
+                        <!-- ===== FIN DEL CÓDIGO AÑADIDO ===== -->
+                    @endcan  
 
                     <flux:navlist.item icon="clipboard" :href="route('mis-registros')" :current="request()->routeIs('mis-registros')" wire:navigate>{{ __('Mis Registros') }}</flux:navlist.item>
 

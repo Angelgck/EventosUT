@@ -20,6 +20,11 @@ Route::get('/dashboard', Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// ↓↓↓ AÑADE ESTA RUTA ↓↓↓
+Route::get('/historial-estudiantes', [App\Http\Controllers\AdminController::class, 'historialEstudiantes'])
+    ->middleware(['auth', 'admin']) // Usaremos un middleware 'admin' que crearemos después
+    ->name('admin.historial');
+
 // RUTA AÑADIDA PARA GESTIONAR EVENTOS
 Route::get('gestionar-eventos', \App\Livewire\GestionarEventos::class)
     ->middleware(['auth', 'verified','can:isAdmin'])
